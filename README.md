@@ -17,6 +17,14 @@ The system sorts packages into three different categories:
 - **Bulky package**: Either its volume is ≥ 1,000,000 cm³ (1 cubic meter) OR any dimension is ≥ 150 cm
 - **Heavy package**: Weight is ≥ 20 kg
 
+## Running Tests
+
+To run the tests, use the following command:
+
+```bash
+mix test
+```
+
 ## Interactive Demo
 
 ### Installing Elixir
@@ -72,11 +80,3 @@ Where:
 - `mass` is in kilograms
 
 Returns: String with the classification result ("STANDARD", "SPECIAL", or "REJECTED")
-
-### Running Tests
-
-To run the tests, use the following command:
-
-```bash
-mix test
-```
