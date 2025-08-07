@@ -1,7 +1,7 @@
 defmodule PackageSorter do
   @moduledoc """
-  Package sorting module for robotic automation factory.
-  Sorts packages into different stacks based on their dimensions and mass.
+  Package sorting module.
+  Sorts packages into different stacks based on dimensions.
   """
 
   @doc """
@@ -40,7 +40,7 @@ defmodule PackageSorter do
   def sort(width, height, length, mass) do
     is_bulky = bulky?(width, height, length)
     is_heavy = heavy?(mass)
-    
+
     cond do
       is_bulky and is_heavy -> "REJECTED"
       is_bulky or is_heavy -> "SPECIAL"
