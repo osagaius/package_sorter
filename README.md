@@ -1,32 +1,82 @@
-# Package Sorter
+# Package Sorter - Robotic Sorting System
 
-A simple Elixir module to sort packages according to their volume and mass.
+## What is this?
 
-## Rules
+This is a simple package sorting system/service designed for a robotic automation factory. The system analyzes package dimensions and weight to determine how they should be handled in the warehouse.
 
-- A package is **bulky** if its volume (Width x Height x Length) is greater than or equal to 1,000,000 cm³ or when one of its dimensions is greater or equal to 150 cm.
-- A package is **heavy** when its mass is greater or equal to 20 kg.
+## How It Works
 
-Packages are sorted into the following stacks:
+The system sorts packages into three different categories:
 
-- **STANDARD**: standard packages (those that are not bulky or heavy) can be handled normally.
-- **SPECIAL**: packages that are either heavy or bulky can't be handled automatically.
-- **REJECTED**: packages that are **both** heavy and bulky are rejected.
+- **STANDARD**: Regular packages that can be handled normally (neither bulky nor heavy)
+- **SPECIAL**: Packages that need special handling (either bulky OR heavy)
+- **REJECTED**: Packages that cannot be processed (both bulky AND heavy)
 
-## Usage
+## Package Classification Rules
 
-```elixir
-PackageSorter.sort(width, height, length, mass)
-```
+- **Bulky package**: Either its volume is ≥ 1,000,000 cm³ (1 cubic meter) OR any dimension is ≥ 150 cm
+- **Heavy package**: Weight is ≥ 20 kg
+
+## Interactive Demo
+
+### Installing Elixir
+
+1. **macOS** (using Homebrew):
+
+   ```bash
+   brew install elixir
+   ```
+
+2. **Linux** (Ubuntu/Debian):
+   ```bash
+   wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
+   sudo dpkg -i erlang-solutions_2.0_all.deb
+   sudo apt-get update
+   sudo apt-get install esl-erlang elixir
+   ```
+
+### Usage in IEx Console
+
+After installing Elixir, you can try the package sorter in the interactive Elixir console (IEx):
+
+1. Clone this repository and navigate to its directory
+2. Start the IEx console with the project loaded:
+   ```bash
+   iex -S mix
+   ```
+3. Use the `sort` function:
+
+   ```elixir
+   # Usage: PackageSorter.sort(width, height, length, mass)
+
+   # Example: Standard package
+   iex> PackageSorter.sort(90, 90, 90, 15)
+   "STANDARD"
+
+   # Example: Special package (bulky)
+   iex> PackageSorter.sort(150, 90, 90, 15)
+   "SPECIAL"
+
+   # Example: Another package (heavy)
+   iex> PackageSorter.sort(90, 90, PackageSorter.sort(150, 90, 90, 20)90, 20)
+   "SPECIAL"
+
+   # Example: Rejected package (both bulky and heavy)
+   iex> PackageSorter.sort(150, 90, 90, 20)
+   "REJECTED"
+   ```
 
 Where:
+
 - `width`, `height`, and `length` are dimensions in centimeters
 - `mass` is in kilograms
 
-Returns: String representing the stack name ("STANDARD", "SPECIAL", or "REJECTED")
+Returns: String with the classification result ("STANDARD", "SPECIAL", or "REJECTED")
 
-## Running Tests
+### Running Tests
 
-```
+To run the tests, use the following command:
+
+```bash
 mix test
 ```

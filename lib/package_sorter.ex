@@ -48,22 +48,18 @@ defmodule PackageSorter do
     end
   end
 
-  @doc """
-  Determines if a package is bulky based on its dimensions.
-  A package is bulky if:
-  - Its volume is >= 1,000,000 cm³, or
-  - Any of its dimensions is >= 150 cm
-  """
+  # Determines if a package is bulky based on its dimensions.
+  # A package is bulky if:
+  # - Its volume is >= 1,000,000 cm³, or
+  # - Any of its dimensions is >= 150 cm
   @spec bulky?(number(), number(), number()) :: boolean()
   defp bulky?(width, height, length) do
     volume = width * height * length
     volume >= 1_000_000 or width >= 150 or height >= 150 or length >= 150
   end
 
-  @doc """
-  Determines if a package is heavy based on its mass.
-  A package is heavy if its mass is >= 20 kg.
-  """
+  # Determines if a package is heavy based on its mass.
+  # A package is heavy if its mass is >= 20 kg.
   @spec heavy?(number()) :: boolean()
   defp heavy?(mass), do: mass >= 20
 end
