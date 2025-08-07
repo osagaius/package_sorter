@@ -24,13 +24,13 @@ defmodule PackageSorter do
 
   ## Examples
 
-      iex> PackageSorter.sort(100, 100, 100, 10)
+      iex> PackageSorter.sort(99, 99, 99, 10)
       "STANDARD"
 
       iex> PackageSorter.sort(150, 100, 100, 10)
       "SPECIAL"
 
-      iex> PackageSorter.sort(100, 100, 100, 20)
+      iex> PackageSorter.sort(99, 99, 99, 20)
       "SPECIAL"
 
       iex> PackageSorter.sort(150, 100, 100, 20)
